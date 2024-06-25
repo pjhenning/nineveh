@@ -30,10 +30,10 @@ import com.bladecoder.inkplayer.i18n.I18N;
 
 public class StoryManager implements Serializable {
 	private static final String TAG="StoryManager";
-	
+
 	public static final String GAMESTATE_EXT = ".gamestate.v1";
 	private static final String GAMESTATE_FILENAME = "default" + GAMESTATE_EXT;
-	
+
 	public final static char NAME_VALUE_TAG_SEPARATOR = ':';
 	public final static char NAME_VALUE_PARAM_SEPARATOR = '=';
 	private final static String PARAM_SEPARATOR = ",";
@@ -47,7 +47,7 @@ public class StoryManager implements Serializable {
 	private String storyName;
 
 	private StoryListener l;
-	
+
 	// save all spit texts
 	private List<Line> record = new ArrayList<Line>();
 
@@ -86,7 +86,7 @@ public class StoryManager implements Serializable {
 		if (storyName != null && EngineAssetManager.getInstance().getAsset(storyName + "-ink.properties").exists())
 			i18n = I18N.getBundle(storyName + "-ink", true);
 	}
-	
+
 	public List<Line> getRecod() {
 		return record;
 	}
@@ -121,7 +121,7 @@ public class StoryManager implements Serializable {
 
 	public boolean compareVariable(String name, String value) {
 		if (story.getVariablesState().get(name) instanceof InkList) {
-			return ((InkList) story.getVariablesState().get(name)).ContainsItemNamed(value);
+			return ((InkList) story.getVariablesState().get(name)).containsItemNamed(value);
 		} else {
 			return story.getVariablesState().get(name).toString().equals(value);
 		}
@@ -149,7 +149,7 @@ public class StoryManager implements Serializable {
 		} else
 			story.getVariablesState().set(name, value);
 	}
-	
+
 	public void next() {
 		String line = null;
 
@@ -259,10 +259,10 @@ public class StoryManager implements Serializable {
 		}
 
 		String tline =  translateLine(line);
-		
+
 		Line line2 = new Line(tline, params);
 		record.add(line2);
-		
+
 		if(l != null) {
 			l.line(line2);
 		}
@@ -335,15 +335,15 @@ public class StoryManager implements Serializable {
 			Gdx.app.error( TAG, e.getMessage(), e);
 		}
 	}
-	
+
 	public void setStoryListener(StoryListener sl) {
 		this.l = sl;
 	}
-	
+
 	public StoryListener getStoryListener() {
 		return l;
 	}
-	
+
 	public boolean savedGameExists() {
 		return savedGameExists(GAMESTATE_FILENAME);
 	}
@@ -368,7 +368,7 @@ public class StoryManager implements Serializable {
 			savedFile = EngineAssetManager.getInstance().getAsset("tests/" + filename);
 
 		loadGameState(savedFile);
-		
+
 		if(l != null)
 			l.loadGame();
 	}
@@ -419,7 +419,7 @@ public class StoryManager implements Serializable {
 		} finally {
 			w.close();
 		}
-	}	
+	}
 
 	@Override
 	public void write(Json json) {
@@ -428,7 +428,7 @@ public class StoryManager implements Serializable {
 
 		if (story != null) {
 			json.writeValue("record", record, ArrayList.class, Line.class);
-			
+
 			try {
 				json.writeValue("story", story.getState().toJson());
 			} catch (Exception e) {
@@ -440,7 +440,7 @@ public class StoryManager implements Serializable {
 	@SuppressWarnings("unchecked")
 	@Override
 	public void read(Json json, JsonValue jsonData) {
-		
+
 		// READ STORY
 		String storyName = json.readValue("storyName", String.class, jsonData);
 		String storyString = json.readValue("story", String.class, jsonData);
@@ -454,7 +454,7 @@ public class StoryManager implements Serializable {
 			} catch (Exception e) {
 				Gdx.app.error( TAG, e.getMessage(), e);
 			}
-			
+
 			record = json.readValue("record", ArrayList.class, Line.class, jsonData);
 		}
 	}
