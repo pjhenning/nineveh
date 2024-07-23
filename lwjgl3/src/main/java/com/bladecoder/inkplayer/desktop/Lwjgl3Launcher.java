@@ -2,7 +2,7 @@ package com.bladecoder.inkplayer.desktop;
 
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3ApplicationConfiguration;
-import com.bladecoder.inkplayer.InkApp;
+import com.pjh.nineveh.AppMain;
 
 /** Launches the desktop (LWJGL3) application. */
 public class Lwjgl3Launcher {
@@ -11,7 +11,7 @@ public class Lwjgl3Launcher {
     public static void main(String[] args) {
         if (StartupHelper.startNewJvmIfRequired(args)) return; // This handles macOS support and helps on Windows.
 
-        InkApp app = new InkApp();
+        AppMain app = new AppMain();
 
         parseArgs(args, app);
 
@@ -39,7 +39,7 @@ public class Lwjgl3Launcher {
         return configuration;
     }
 
-    private static void parseArgs(String[] args, InkApp app) {
+    private static void parseArgs(String[] args, AppMain app) {
         for (int i = 0; i < args.length; i++) {
             String s = args[i];
             if (s.equals("-p")) {
