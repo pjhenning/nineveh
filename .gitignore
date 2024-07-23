@@ -144,6 +144,10 @@ www-test/
 nbactions.xml
 nb-configuration.xml
 
+## Scala:
+.metals
+.bloop
+
 ## OS-Specific:
 .DS_Store
 Thumbs.db
