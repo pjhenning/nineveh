@@ -28,7 +28,7 @@ subprojects {
    }
 }
 
-eclipse.project.name = 'blade-ink-template' + '-parent'
+eclipse.project.name = 'nineveh' + '-parent'
 
 // Run `gradle pack` task to generate skin.atlas file at assets/ui.
 import com.badlogic.gdx.tools.texturepacker.TexturePacker
